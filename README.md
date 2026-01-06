@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💬 Token Counter Chat Application
 
-## Getting Started
+A modern, high-performance chat interface built with Next.js 15, TypeScript, and Tailwind CSS. The application features real-time token tracking based on character count, strict usage limits, and a comprehensive statistics dashboard.
 
-First, run the development server:
+## 🚀 Quick Start
+
+To run the application locally, ensure you have Node.js installed and follow these steps:
+
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Open the App
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Navigate to [http://localhost:3000](http://localhost:3000) to view the application.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Features
 
-## Learn More
+### 🛠️ Chat Interface
 
-To learn more about Next.js, take a look at the following resources:
+- **Real-time Tracking**: As you type, a live counter displays the token usage for the current message.
+- **Submission Validation**: The "Send" button is automatically disabled if the message exceeds the per-message limit or the global token cap.
+- **Message Persistence**: All chat history is persisted across browser sessions using `localStorage`.
+- **Deletion Functionality**: Users can delete individual messages to reclaim global token capacity.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 📊 Statistics Dashboard
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Total Usage**: Displays the cumulative number of tokens used across all existing messages.
+- **Remaining Tokens**: Calculates available capacity based on a global hard limit.
+- **Visual Utilization**: A dynamic progress bar provides immediate feedback on global limit status.
 
-## Deploy on Vercel
+## ⚙️ Token Logic & Rules
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The application strictly implements the following business rules:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Rule | Value | Description |
+|------|-------|-------------|
+| **Token Calculation** | 1 token = 4 characters | Values are always rounded up to the nearest integer. |
+| **Per-Message Limit** | 100 tokens | Messages exceeding this limit cannot be submitted. |
+| **Global Limit** | 1,000 tokens | The maximum allowed usage across all active messages. |
+
+## 🏗️ Technical Architecture
+
+This project follows an industry-standard modular structure to ensure scalability and maintainability:
+
+- **App Router (`/src/app`)**: Handles navigation and layout.
+- **Context API (`/src/context`)**: Centralizes state management for messages and token calculations, ensuring data consistency between the Chat and Stats pages.
+- **Modular Components (`/src/components`)**:
+  - `MessageList`: Manages message grouping and date headers.
+  - `MessageItem`: Handles individual row logic, avatars, and right-aligned controls.
+  - `ChatInput`: Encapsulates live counting logic and validation.
+  - `StatsCard`: Reusable component for dashboard metrics.
+- **Utility Layer (`/src/utils`)**: Contains pure, testable functions for token calculations.
+
+## 🎨 UI/UX Design
+
+- **Desktop First**: Optimized specifically for a desktop experience as per the project requirements.
+- **Feedback Loops**: The UI uses color-coded indicators (Blue/Slate for safe, Red for limits) to guide the user.
+- **SaaS Aesthetics**: Built with a clean Slate/Blue color palette, professional typography, and smooth Tailwind transitions for a modern feel.
+
+## 📂 Project Structure
+
+```
+token-counter-chat/
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   └── stats/
+│   │       └── page.tsx
+│   ├── components/
+│   │   ├── ChatInput.tsx
+│   │   ├── MessageItem.tsx
+│   │   ├── MessageList.tsx
+│   │   └── StatsCard.tsx
+│   ├── context/
+│   │   └── ChatContext.tsx
+│   └── utils/
+│       └── tokenCalculator.ts
+├── public/
+├── package.json
+├── tsconfig.json
+├── tailwind.config.js
+└── next.config.js
+```
+
+## 🛠️ Technologies Used
+
+- **Next.js 15**: React framework with App Router
+- **TypeScript**: Type-safe development
+- **Tailwind CSS**: Utility-first CSS framework
+- **React Context API**: State management
+- **localStorage**: Client-side data persistence
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](../../issues).
+
+---
+
+Built with ❤️ using Next.js 15, TypeScript, and Tailwind CSS
