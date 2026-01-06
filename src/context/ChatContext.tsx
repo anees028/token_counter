@@ -16,7 +16,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load data from localStorage on mount
+  // Load data from localStorage on initial render
   useEffect(() => {
     const saved = localStorage.getItem("token_chat_history");
     if (saved) setMessages(JSON.parse(saved));
@@ -31,11 +31,12 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   }, [messages, isLoaded]);
 
   const totalUsed = messages.reduce((sum, msg) => sum + msg.tokens, 0);
+  const createdAt = new Date().toISOString();
 
   const addMessage = (text: string) => {
     const tokens = calculateTokens(text);
     if (tokens <= MESSAGE_LIMIT && totalUsed + tokens <= GLOBAL_LIMIT) {
-      const newMessage = { id: crypto.randomUUID(), text, tokens };
+      const newMessage = { id: crypto.randomUUID(), text, tokens, createdAt };
       setMessages((prev) => [...prev, newMessage]);
       return true;
     }
@@ -48,7 +49,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <ChatContext.Provider
-      value={{ messages, addMessage, deleteMessage, totalUsed, isLoaded }}
+      value={{ messages, createdAt , addMessage, deleteMessage, totalUsed, isLoaded }}
     >
       {children}
     </ChatContext.Provider>
