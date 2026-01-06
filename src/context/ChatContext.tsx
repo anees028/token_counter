@@ -1,11 +1,7 @@
 "use client";
 import { Message } from "@/types";
+import { GLOBAL_LIMIT, MESSAGE_LIMIT, TOKEN_RATE } from "@/utils/token-logic";
 import React, { createContext, useContext, useState, useEffect } from "react";
-
-
-export const TOKEN_RATE = 4;
-export const MESSAGE_LIMIT = 100;
-export const GLOBAL_LIMIT = 1000;
 
 export const calculateTokens = (text: string) =>
   Math.ceil(text.length / TOKEN_RATE);
