@@ -1,6 +1,7 @@
 "use client";
+import { Message } from "@/types";
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { Message } from "@/interface/MessageInterface";
+
 
 export const TOKEN_RATE = 4;
 export const MESSAGE_LIMIT = 100;
