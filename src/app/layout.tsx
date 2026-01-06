@@ -1,7 +1,7 @@
 import { ChatProvider } from "@/context/ChatContext";
 
 import "./globals.css";
-import Sidebar from "@/components/SideBar";
+import Sidebar from "@/components/sidebar/SideBar";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
