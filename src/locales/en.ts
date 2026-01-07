@@ -1,14 +1,19 @@
 export const en = {
   title: "Token Counter App",
-  nav: { chat: "Chat Interface", stats: "Statistics" },
+  nav: { 
+    chat: "Chat Interface", 
+    realtimetracking: "Real-time Token Tracking",
+    stats: "Statistics" },
   chat: {
+    avatar: "Me",
     header: "Chat Session",
     subheader: "Messages are tracked in real-time for token usage.",
-    placeholder: "What's on your mind?...",
+    placeholder: "Type a message (Enter to send, Shift+Enter for new line)...",
     send: "Send Message",
     usage: "Usage",
     limitReached: "Insufficient Global Balance!",
-    noMessages: "No messages yet. Start the conversation!",
+    noMessages: "No messages yet.",
+    startConversation: " Start typing to track tokens!",
     delete: "DELETE",
     tokens: "Tokens"
   },

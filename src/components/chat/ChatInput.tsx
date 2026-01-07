@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { calculateTokens, MESSAGE_LIMIT, GLOBAL_LIMIT } from "@/utils/token-logic";
+import { useLocale } from "@/context/LocaleContext";
 
 interface Props {
   onSend: (text: string) => void;
@@ -9,6 +10,7 @@ interface Props {
 
 export default function ChatInput({ onSend, totalUsed }: Props) {
   const [input, setInput] = useState("");
+  const {locale, toggleLocale, t} = useLocale();
   
   const currentTokens = calculateTokens(input);
   const isTooLong = currentTokens > MESSAGE_LIMIT; 
@@ -35,7 +37,7 @@ export default function ChatInput({ onSend, totalUsed }: Props) {
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyDown} // Trigger send on Enter
         className="w-full h-24 resize-none outline-none text-slate-700 font-medium placeholder:text-slate-300"
-        placeholder="Type a message (Enter to send, Shift+Enter for new line)..."
+        placeholder={t.chat.placeholder}
       />
       
       <div className="flex justify-between items-center mt-4 pt-4 border-t border-slate-100">
@@ -43,11 +45,11 @@ export default function ChatInput({ onSend, totalUsed }: Props) {
           <span className={`text-[11px] font-black uppercase tracking-tighter ${
             isTooLong || willExceedGlobal ? 'text-red-500' : 'text-slate-400'
           }`}>
-            Usage: {currentTokens} / {MESSAGE_LIMIT} Tokens
+            {t.chat.usage}: {currentTokens} / {MESSAGE_LIMIT} {t.chat.tokens}
           </span>
           {willExceedGlobal && !isTooLong && (
             <span className="text-[9px] text-red-500 font-bold italic">
-              Global Limit Reached [cite: 21]
+              {t.chat.limitReached}
             </span>
           )}
         </div>
@@ -57,7 +59,7 @@ export default function ChatInput({ onSend, totalUsed }: Props) {
           onClick={handleSend}
           className="bg-blue-600 text-white px-10 py-3 rounded-2xl font-bold shadow-lg hover:bg-blue-700 disabled:bg-slate-100 disabled:text-slate-300 transition-all"
         >
-          Send
+          {t.chat.send}
         </button>
       </div>
     </div>
