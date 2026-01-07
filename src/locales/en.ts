@@ -1,4 +1,5 @@
 export const en = {
+  title: "Token Counter App",
   nav: { chat: "Chat Interface", stats: "Statistics" },
   chat: {
     header: "Chat Session",

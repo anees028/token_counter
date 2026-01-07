@@ -16,7 +16,7 @@ export default function Sidebar() {
     <aside className="w-64 bg-white border-r border-slate-200 h-screen fixed left-0 top-0 flex flex-col">
       <div className="p-8">
         <h1 className="text-2xl font-black text-blue-600 tracking-tighter italic">
-          TOKEN.APP
+          {t.title}
         </h1>
       </div>
       
