@@ -100,6 +100,11 @@ token-counter-chat/
 - **React Context API**: State management
 - **localStorage**: Client-side data persistence
 
+## 🌍 Internationalization (i18n)
+- Dual-Language Support: Fully localized in English and German.
+- Dictionary-Based Architecture: Scalable i18n implementation using a Custom Context Provider.
+- Preference Persistence: Automatically remembers the user's language choice.
+
 
 ---
 
