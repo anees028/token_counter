@@ -2,6 +2,7 @@
 import { useEffect, useRef } from "react";
 import { Message } from "@/types";
 import MessageItem from "./MessageItem";
+import { useLocale } from "@/context/LocaleContext";
 
 interface Props {
   messages: Message[];
@@ -10,6 +11,7 @@ interface Props {
 
 export default function MessageList({ messages, onDelete }: Props) {
   const scrollEndRef = useRef<HTMLDivElement>(null);
+  const { locale, toggleLocale, t } = useLocale();
 
   const formatDate = (date: string) => new Date(date).toLocaleDateString();
 
@@ -24,7 +26,7 @@ export default function MessageList({ messages, onDelete }: Props) {
         <div className="h-64 flex flex-col items-center justify-center text-slate-400 border-2 border-dashed border-slate-200 rounded-3xl">
           <span className="text-4xl mb-2">💬</span>
           <p className="font-medium text-slate-500 text-center">
-            No messages yet. <br /> Start typing to track tokens!
+            {t.chat.noMessages} <br /> {t.chat.startConversation}
           </p>
         </div>
       ) : (
